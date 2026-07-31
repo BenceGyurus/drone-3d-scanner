@@ -7,5 +7,6 @@ ffmpeg-python
 python-multipart
 aiofiles
 pytest
+pytest-asyncio
 requests
 httpx
