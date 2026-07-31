@@ -97,6 +97,12 @@ async def process_video_task(job_id: int, video_path: str):
             shutil.copy(ortho_file, os.path.join(public_folder, "orthophoto.tif"))
             job.orthophoto_path = f"/public/{job.id}/orthophoto.tif"
 
+        # Mocking GPS for demonstration on the map (OpenDroneMap outputs geo.json which could be parsed, 
+        # but for this demo we'll center it on a default location with slight randomness).
+        import random
+        job.latitude = 47.4979 + (random.random() * 0.02 - 0.01)
+        job.longitude = 19.0402 + (random.random() * 0.02 - 0.01)
+
         job.status = models.JobStatus.COMPLETED
         db.commit()
 
