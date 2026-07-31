@@ -20,3 +20,11 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       # Bind mount the data directory so the host path is predictable
       - ./backend/data:/app/data
+
+  # Defined here as requested, used by the backend dynamically
+  odm:
+    image: opendronemap/odm:latest
+    profiles:
+      - worker
+    volumes:
+      - ./backend/data:/datasets

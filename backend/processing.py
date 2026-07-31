@@ -50,13 +50,13 @@ async def process_video_task(job_id: int, video_path: str):
         job.status = models.JobStatus.PROCESSING_ODM
         db.commit()
 
-        # We spawn the opendronemap/odm container. It will read from /datasets/code/images 
-        # and write to /datasets/code/odm_texturing, etc.
+        # We spawn the opendronemap/odm container. It will read from /datasets/{job_id}/images
         odm_cmd = [
             "docker", "run", "--rm",
-            "-v", f"{host_job_folder}:/datasets/code",
+            "-v", f"{HOST_DATA_DIR}:/datasets",
             "opendronemap/odm",
-            "--project-path", "/datasets"
+            "--project-path", "/datasets",
+            str(job.id)
         ]
         
         # We can add parameters to speed up or improve results
