@@ -13,25 +13,10 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - NODEODM_URL=http://nodeodm:3000
+      # PWD is the directory where docker-compose up is run from
+      - HOST_DATA_DIR=${PWD}/backend/data
     volumes:
-      - backend-data:/app/data
-    depends_on:
-      - nodeodm
-
-  nodeodm:
-    image: opendronemap/nodeodm:latest
-    ports:
-      - "3000:3000"
-    # To use GPU, change the image to: opendronemap/nodeodm:gpu
-    # and uncomment the following lines (requires NVIDIA Container Toolkit):
-    # deploy:
-    #   resources:
-    #     reservations:
-    #       devices:
-    #         - driver: nvidia
-    #           count: 1
-    #           capabilities: [gpu]
-
-volumes:
-  backend-data:
+      # Map the docker socket so the backend can spawn ODM containers
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Bind mount the data directory so the host path is predictable
+      - ./backend/data:/app/data

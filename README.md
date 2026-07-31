@@ -20,11 +20,12 @@ docker-compose up -d
 Once started, the application will be available at:
 - **Frontend**: http://localhost
 - **Backend API**: http://localhost:8000
-- **NodeODM**: http://localhost:3000
+
+The backend natively orchestrates the `opendronemap/odm` Docker container dynamically as needed using Docker socket mounting.
 
 ### GPU Support
 
-To run NodeODM with GPU support for significantly faster processing, edit `docker-compose.yml` to use `opendronemap/nodeodm:gpu` and uncomment the NVIDIA deployment reservations section. You must have the NVIDIA Container Toolkit installed on your Linux host.
+To run ODM with GPU support for significantly faster processing, you can edit `backend/processing.py` to change the `opendronemap/odm` image string to `opendronemap/odm:gpu`, and pass the `--gpus all` flags to the subprocess arguments. You must have the NVIDIA Container Toolkit installed on your Linux host.
 
 ## Development
 

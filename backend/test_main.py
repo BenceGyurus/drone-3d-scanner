@@ -32,7 +32,8 @@ def setup_teardown():
     models.Base.metadata.create_all(bind=engine)
     yield
 
-def test_create_job():
+@patch("backend.main.processing.process_video_task")
+def test_create_job(mock_task):
     video_content = b"fake_video_content"
     video_file = BytesIO(video_content)
     video_file.name = "test.mp4"
@@ -48,6 +49,7 @@ def test_create_job():
     assert data["name"] == "Test Scan"
     assert data["status"] == "PENDING"
     assert "id" in data
+    mock_task.assert_called_once()
 
 def test_create_job_invalid_format():
     video_content = b"fake_video_content"
@@ -62,7 +64,8 @@ def test_create_job_invalid_format():
     
     assert response.status_code == 400
 
-def test_get_jobs():
+@patch("backend.main.processing.process_video_task")
+def test_get_jobs(mock_task):
     client.post(
         "/jobs/",
         data={"name": "Job 1"},
@@ -78,7 +81,8 @@ def test_get_jobs():
     assert response.status_code == 200
     assert len(response.json()) == 2
 
-def test_delete_job():
+@patch("backend.main.processing.process_video_task")
+def test_delete_job(mock_task):
     res = client.post(
         "/jobs/",
         data={"name": "Job to Delete"},
