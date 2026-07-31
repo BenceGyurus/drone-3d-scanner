@@ -31,7 +31,7 @@ async def create_job(
     video: UploadFile = File(...),
     db: Session = Depends(database.get_db)
 ):
-    if not video.filename.endswith(('.mp4', '.mov', '.avi')):
+    if not video.filename.lower().endswith(('.mp4', '.mov', '.avi')):
         raise HTTPException(status_code=400, detail="Invalid video format")
     
     # Save the job in DB

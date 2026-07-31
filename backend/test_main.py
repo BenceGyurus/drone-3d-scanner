@@ -36,12 +36,12 @@ def setup_teardown():
 def test_create_job(mock_task):
     video_content = b"fake_video_content"
     video_file = BytesIO(video_content)
-    video_file.name = "test.mp4"
+    video_file.name = "test.MP4"
     
     response = client.post(
         "/jobs/",
         data={"name": "Test Scan"},
-        files={"video": ("test.mp4", video_file, "video/mp4")}
+        files={"video": ("test.MP4", video_file, "video/mp4")}
     )
     
     assert response.status_code == 200
