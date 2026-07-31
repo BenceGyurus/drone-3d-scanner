@@ -10,6 +10,8 @@ export type Job = {
   name: string;
   status: string;
   error_message?: string;
+  latitude?: number;
+  longitude?: number;
   model_path?: string;
   orthophoto_path?: string;
   created_at: string;
