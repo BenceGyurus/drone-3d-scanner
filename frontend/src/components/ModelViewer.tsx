@@ -1,5 +1,5 @@
 import '@google/model-viewer';
-import { Job, API_URL } from '../App';
+import { type Job, API_URL } from '../App';
 import { Download } from 'lucide-react';
 
 interface ModelViewerProps {

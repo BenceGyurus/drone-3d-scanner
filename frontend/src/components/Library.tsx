@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { API_URL, Job } from '../App';
+import { API_URL, type Job } from '../App';
 import { Layers, Trash2, Map, RefreshCw } from 'lucide-react';
 
 interface LibraryProps {

@@ -3,7 +3,7 @@ import './App.css';
 import Upload from './components/Upload';
 import Library from './components/Library';
 import ModelViewer from './components/ModelViewer';
-import { Camera, Layers, Box } from 'lucide-react';
+import { Camera, Box } from 'lucide-react';
 
 export type Job = {
   id: number;
