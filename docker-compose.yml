@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: ghcr.io/bencegyurus/drone-3d-scanner-frontend:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  backend:
+    image: ghcr.io/bencegyurus/drone-3d-scanner-backend:latest
+    ports:
+      - "8000:8000"
+    environment:
+      - NODEODM_URL=http://nodeodm:3000
+    volumes:
+      - backend-data:/app/data
+    depends_on:
+      - nodeodm
+
+  nodeodm:
+    image: opendronemap/nodeodm:latest
+    ports:
+      - "3000:3000"
+    # To use GPU, change the image to: opendronemap/nodeodm:gpu
+    # and uncomment the following lines (requires NVIDIA Container Toolkit):
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+volumes:
+  backend-data:

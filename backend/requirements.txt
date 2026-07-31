@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+pydantic
+ffmpeg-python
+pyodm
+python-multipart
+aiofiles
+pytest
+requests
+httpx
