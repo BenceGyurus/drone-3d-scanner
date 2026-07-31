@@ -3,8 +3,8 @@ from fastapi.testclient import TestClient
 from unittest.mock import patch, MagicMock
 from io import BytesIO
 
-from .main import app
-from . import database, models
+from main import app
+import database, models
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -32,7 +32,7 @@ def setup_teardown():
     models.Base.metadata.create_all(bind=engine)
     yield
 
-@patch("backend.main.processing.process_video_task")
+@patch("main.processing.process_video_task")
 def test_create_job(mock_task):
     video_content = b"fake_video_content"
     video_file = BytesIO(video_content)
@@ -64,7 +64,7 @@ def test_create_job_invalid_format():
     
     assert response.status_code == 400
 
-@patch("backend.main.processing.process_video_task")
+@patch("main.processing.process_video_task")
 def test_get_jobs(mock_task):
     client.post(
         "/jobs/",
@@ -81,7 +81,7 @@ def test_get_jobs(mock_task):
     assert response.status_code == 200
     assert len(response.json()) == 2
 
-@patch("backend.main.processing.process_video_task")
+@patch("main.processing.process_video_task")
 def test_delete_job(mock_task):
     res = client.post(
         "/jobs/",

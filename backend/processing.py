@@ -5,7 +5,7 @@ import subprocess
 import ffmpeg
 import random
 from sqlalchemy.orm import Session
-from . import models, database
+import models, database
 
 DATA_DIR = os.path.join(os.getcwd(), "data")
 # HOST_DATA_DIR is required so the backend knows where the data folder is mounted on the host machine.

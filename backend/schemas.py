@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
-from .models import JobStatus
+from models import JobStatus
 
 class ScanJobBase(BaseModel):
     name: str

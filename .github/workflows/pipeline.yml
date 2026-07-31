@@ -31,7 +31,7 @@ jobs:
     - name: Test with pytest
       working-directory: ./backend
       run: |
-        pytest
+        PYTHONPATH=. pytest
 
   test-frontend:
     runs-on: ubuntu-latest

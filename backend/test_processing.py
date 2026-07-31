@@ -4,8 +4,9 @@ import pytest
 from unittest.mock import patch, MagicMock
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
-from backend.models import Base, ScanJob, JobStatus
-from backend.processing import process_video_task
+import models
+from models import Base, ScanJob, JobStatus
+from processing import process_video_task
 
 @pytest.fixture
 def mock_db_session():
@@ -21,16 +22,16 @@ def mock_db_session():
     yield session
     session.close()
 
-@patch("backend.processing.database.SessionLocal")
-@patch("backend.processing.ffmpeg")
-@patch("backend.processing.subprocess.run")
-@patch("backend.processing.shutil.rmtree")
-@patch("backend.processing.shutil.copy")
-@patch("backend.processing.os.remove")
-@patch("backend.processing.os.listdir")
-@patch("backend.processing.os.path.isdir")
-@patch("backend.processing.os.path.exists")
-@patch("backend.processing.os.makedirs")
+@patch("processing.database.SessionLocal")
+@patch("processing.ffmpeg")
+@patch("processing.subprocess.run")
+@patch("processing.shutil.rmtree")
+@patch("processing.shutil.copy")
+@patch("processing.os.remove")
+@patch("processing.os.listdir")
+@patch("processing.os.path.isdir")
+@patch("processing.os.path.exists")
+@patch("processing.os.makedirs")
 @pytest.mark.asyncio
 async def test_process_video_task(
     mock_makedirs, mock_exists, mock_isdir, mock_listdir, mock_remove, mock_copy, 

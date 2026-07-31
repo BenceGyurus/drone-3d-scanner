@@ -6,7 +6,7 @@ import os
 import shutil
 import uuid
 
-from . import models, schemas, database, processing
+import models, schemas, database, processing
 
 models.Base.metadata.create_all(bind=database.engine)
 
