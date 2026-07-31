@@ -17,7 +17,7 @@ export type Job = {
   created_at: string;
 };
 
-export const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+export const API_URL = import.meta.env.VITE_API_URL || `${window.location.protocol}//${window.location.hostname}:8000`;
 
 function App() {
   const [activeTab, setActiveTab] = useState<'upload' | 'library'>('upload');
